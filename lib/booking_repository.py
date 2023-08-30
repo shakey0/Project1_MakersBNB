@@ -22,5 +22,5 @@ class BookingRepository():
         return Booking(row['id'], row["start_date"], row["end_date"], row["user_id"], row["space_id"])
     
     def create(self, booking):
-        self.connection.execute("INSERT INTO bookings(start_date, end_date, user_id, space_id) VALUES(%s, %s, %s, %s)", [booking.start_date, booking.end_date, booking.user_id, booking.space_id])
-        return booking.id
+        record = self.connection.execute("INSERT INTO bookings(start_date, end_date, user_id, space_id) VALUES(%s, %s, %s, %s) RETURNING id", [booking.start_date, booking.end_date, booking.user_id, booking.space_id])
+        return record[0]['id']

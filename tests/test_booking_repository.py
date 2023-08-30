@@ -56,7 +56,7 @@ we add a new booking to the database
 def test_add_booking(db_connection):
     db_connection.seed("seeds/makersbnb.sql")
     repository = BookingRepository(db_connection)
-    bookings = repository.create(Booking(5, datetime.date(2030, 4, 20), datetime.date(2030, 4, 25), 2, 3))
+    bookings = repository.create(Booking(None, datetime.date(2030, 4, 20), datetime.date(2030, 4, 25), 2, 3))
     assert bookings == 5
     assert repository.all() == [
         Booking(1, datetime.date(2030, 1, 17), datetime.date(2030, 1, 19), 2, 3),
