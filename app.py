@@ -10,11 +10,18 @@ app = Flask(__name__)
 # GET /index
 # Returns the homepage
 # Try it:
-#   ; open http://localhost:5000/index
+#   ; open http://localhost:5000/
 @app.route('/', methods=['GET'])
 def get_index():
     return render_template('index.html')
 
+@app.route('/signup', methods=['GET'])
+def get_signup():
+    return render_template('signup.html')
+
+@app.route('/login', methods=['GET'])
+def get_login():
+    return render_template('login.html')
 
 
 # These lines start the server if you run this file directly
