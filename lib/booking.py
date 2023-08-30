@@ -5,7 +5,7 @@ class Booking():
         self.end_date = end_date
         self.user_id = user_id
         self.space_id = space_id
-
+    
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
     
