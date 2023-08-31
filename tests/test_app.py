@@ -100,4 +100,11 @@ def test_sign_up_page_enter_non_identical_passwords(page, test_web_address):
 #     text = page.locator('p')
 #     expect(text).to_have_text('Test Available Spaces')
 
-
+# def test_new_booking(page, test_web_address):
+#     page.goto(f'http://{test_web_address}/')
+#     page.click("text='Login'")
+#     page.click("text='Login'")
+#     page.click("id='3'")
+#     page.fill("input[checkin]", "2030-01-15")
+#     page.fill("input[checkout]", "2030-01-20")
+#     page.click("text='Book'")
