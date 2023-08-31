@@ -70,7 +70,7 @@ def test_sign_up_page_enter_invalid_email_address(page, test_web_address):
 def test_sign_up_page_enter_invalid_password(page, test_web_address):
     page.goto(f'http://{test_web_address}/')
     page.click("text='Sign-up'")
-    page.fill("input[name=email]", "makers@makers.d")
+    page.fill("input[name=email]", "m.@o")
     page.fill("input[name=password]", "lkfek")
     page.click("text='Sign-up'")
     errors = page.locator('.error')
@@ -83,7 +83,7 @@ def test_sign_up_page_enter_invalid_password(page, test_web_address):
 def test_sign_up_page_enter_non_identical_passwords(page, test_web_address):
     page.goto(f'http://{test_web_address}/')
     page.click("text='Sign-up'")
-    page.fill("input[name=email]", "makers@makers.d")
+    page.fill("input[name=email]", "m.@o")
     page.fill("input[name=password]", "Makersbnbpassword!23")
     page.fill("input[name=confirm_password]", "aaaa")
     page.click("text='Sign-up'")
@@ -93,7 +93,7 @@ def test_sign_up_page_enter_non_identical_passwords(page, test_web_address):
 def test_sign_up_page_goes_through_to_available_spaces_page(page, test_web_address):
     page.goto(f'http://{test_web_address}/')
     page.click("text='Sign-up'")
-    page.fill("input[name=email]", "makers@makers.d")
+    page.fill("input[name=email]", "m.@o")
     page.fill("input[name=password]", "Makersbnbpassword!23")
     page.fill("input[name=confirm_password]", "Makersbnbpassword!23")
     page.click("text='Sign-up'")
