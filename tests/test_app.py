@@ -35,8 +35,19 @@ def test_click_signup_button(page, test_web_address):
     signup = page.locator('p')
     expect(signup).to_have_text('Test sign-up')
 
-def test_click_login_button(page, test_web_address):
+def test_click_homepage_login_button(page, test_web_address):
     page.goto(f'http://{test_web_address}/')
     page.click("text='Login'")
-    login = page.locator('p')
-    expect(login).to_have_text('Test login')
+    header = page.locator('.t-header')
+    expect(header).to_have_text('Please Login')
+    email = page.locator('.t-email')
+    expect(email).to_have_text('Email address:')
+    password = page.locator('.t-password')
+    expect(password).to_have_text('Password:')
+
+def test_login_page_available_spaces_get_route(page, test_web_address):
+    page.goto(f'http://{test_web_address}/')
+    page.click("text='Login'")
+    page.click("text='Login'")
+    p_tag = page.locator('p')
+    expect(p_tag).to_have_text('Test Available Spaces')

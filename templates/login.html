@@ -7,7 +7,17 @@
 </head>
 <body>
     <p>
-        Test login
+        <form action="/login" method="POST">
+            <div>
+                <h1 class="t-header">Please Login</h1>
+                <p class="t-email">Email address:</p>
+                <input type="text" name="email" placeholder="Email address">
+                <p class="t-password">Password:</p>
+                <input type="text" name="password" placeholder="Password">
+                <br>
+                <input type="submit" value="Login">
+            </div>
+        </form>
     </p>
 </body>
 </html>
