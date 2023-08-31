@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 from lib.database_connection import get_flask_database_connection
 
 # Create a new Flask app
@@ -22,6 +22,16 @@ def get_signup():
 @app.route('/login', methods=['GET'])
 def get_login():
     return render_template('login.html')
+
+@app.route('/login', methods=['POST'])
+def post_login():
+    return redirect('/available-spaces')
+
+@app.route('/available-spaces', methods=['GET'])
+def get_available_spaces():
+    return render_template('available_spaces.html')
+
+
 
 
 # These lines start the server if you run this file directly
