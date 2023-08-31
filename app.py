@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, render_template, redirect
 from lib.database_connection import get_flask_database_connection
+from lib.space_repository import SpaceRepository
 
 # Create a new Flask app
 app = Flask(__name__)
@@ -29,7 +30,10 @@ def post_login():
 
 @app.route('/available-spaces', methods=['GET'])
 def get_available_spaces():
-    return render_template('available_spaces.html')
+    connection = get_flask_database_connection(app)
+    repo = SpaceRepository(connection)
+    spaces = repo.all()
+    return render_template('available_spaces.html', spaces = spaces)
 
 
 
