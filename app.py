@@ -31,7 +31,14 @@ def post_login():
 def get_available_spaces():
     return render_template('available_spaces.html')
 
-
+'''
+GET /new-space
+Returns heading
+'Enter new space details'
+'''
+@app.route('/new-space', methods=['GET'])
+def add_new_space():
+    return render_template('new_space.html')
 
 
 # These lines start the server if you run this file directly

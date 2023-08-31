@@ -51,3 +51,29 @@ def test_login_page_available_spaces_get_route(page, test_web_address):
     page.click("text='Login'")
     p_tag = page.locator('p')
     expect(p_tag).to_have_text('Test Available Spaces')
+
+'''
+When we go to List New Space
+we should see a page with fields
+for the user to enter details of the space
+that match the Space object properties
+'''
+
+def test_new_space_page_displays(page, test_web_address):
+    page.goto(f'http://{test_web_address}/new-space')
+    h1_tag = page.locator('h1')
+    expect(h1_tag).to_have_text('Enter new space details')
+
+'''
+When we click the field with the appropriate attribute
+we can add that detail to the form
+'''
+def test_add_new_space_with_attribute_details(page, test_web_address):
+    page.goto(f'http://{test_web_address}/new-space')
+    page.fill('text=Space Name')
+    page.fill('text=Description')
+    page.fill('text=Start date')
+    page.fill('text=End date')
+    page.fill('text=Price per night')
+    
+    
