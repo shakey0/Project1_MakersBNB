@@ -41,6 +41,7 @@ def add_new_space():
     return render_template('new_space.html')
 
 
+
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
 # if started in test mode.

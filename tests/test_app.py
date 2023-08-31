@@ -68,12 +68,17 @@ def test_new_space_page_displays(page, test_web_address):
 When we click the field with the appropriate attribute
 we can add that detail to the form
 '''
-def test_add_new_space_with_attribute_details(page, test_web_address):
+def test_add_new_space_with_attribute_details(page, test_web_address, db_connection):
+    db_connection.seed('seeds/makersbnb.sql')
     page.goto(f'http://{test_web_address}/new-space')
-    page.fill('text=Space Name')
-    page.fill('text=Description')
-    page.fill('text=Start date')
-    page.fill('text=End date')
-    page.fill('text=Price per night')
+    page.fill('text=Space Name', 'Test new space')
+    # page.fill('text=Description', 'Test description')
+    # page.fill('text=Start date', '2023-03-01')
+    # page.fill('text=End date', '2023-03-15')
+    # page.fill('text=Price per night', 2000)
+
+    page.click('text=Add new space')
+    name_element = page.locator('.t-name')
+    expect(name_element).to_have_text('Test new space')
     
     
