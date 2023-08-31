@@ -1,10 +1,12 @@
 import os
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, flash
 from lib.database_connection import get_flask_database_connection
+import re
 from lib.space_repository import SpaceRepository
 
 # Create a new Flask app
 app = Flask(__name__)
+app.secret_key = 'your_secret_key_here'
 
 # == Your Routes Here ==
 
@@ -12,6 +14,28 @@ app = Flask(__name__)
 # Returns the homepage
 # Try it:
 #   ; open http://localhost:5000/
+
+def is_valid_email(email):
+    return "@" in email and "." in email
+
+def check_valid_password(password):
+    validation_messages = []
+    if len(password) < 8:
+        validation_messages.append('Password must be at least 8 characters.')
+    if not any(char.isupper() for char in password) or not any(char.islower() for char in password):
+        validation_messages.append('Password must contain uppercase and lowercase characters.')
+    if not any(char.isdigit() for char in password):
+        validation_messages.append('Password must contain at least 1 number.')
+    if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+        validation_messages.append('Password must contain at least 1 symbol.')
+    if not validation_messages:
+        return True
+    else:
+        return validation_messages
+
+def passwords_match(password, confirm_password):
+    return password == confirm_password
+
 @app.route('/', methods=['GET'])
 def get_index():
     return render_template('index.html')
@@ -19,6 +43,25 @@ def get_index():
 @app.route('/signup', methods=['GET'])
 def get_signup():
     return render_template('signup.html')
+
+@app.route('/sign_up', methods=['POST'])
+def signup(): 
+    email_address = request.form['email']
+    password = request.form['password']
+    confirm_password = request.form['confirm_password']
+    if not is_valid_email(email_address):
+        flash(f"{email_address} is not a valid email address","error")
+        return redirect('/signup')
+    password_is_valid = check_valid_password(password)
+    if password_is_valid != True:
+        for error in password_is_valid:
+            flash(error, "error")
+        return redirect('/signup')
+    if not passwords_match(password, confirm_password):
+        flash("passwords do not match", "error")
+        return redirect('/signup')
+
+    return redirect('/available-spaces')
 
 @app.route('/login', methods=['GET'])
 def get_login():
