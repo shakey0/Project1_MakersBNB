@@ -46,10 +46,10 @@ CREATE TABLE bookings (
 -- Finally, we add any records that are needed for the tests to run
 INSERT INTO users (name, email, password) VALUES ('user1', 'user1@email.com', 'password1');
 INSERT INTO users (name, email, password) VALUES ('user2', 'user2@email.com', 'password2');
-INSERT INTO spaces (name, description, start_date, end_date, price, user_id) VALUES ('space1', 'description1', '2030-01-01', '2030-02-01', '1000', 1);
-INSERT INTO spaces (name, description, start_date, end_date, price, user_id) VALUES ('space2', 'description2', '2031-02-02', '2031-02-28', '15000', 1);
-INSERT INTO spaces (name, description, start_date, end_date, price, user_id) VALUES ('space3', 'description3', '2030-01-15', '2030-02-15', '2000', 2);
-INSERT INTO spaces (name, description, start_date, end_date, price, user_id) VALUES ('space4', 'description4', '2030-03-04', '2030-03-14', '70000', 2);
+INSERT INTO spaces (name, description, start_date, end_date, price, user_id) VALUES ('space1', 'description1', '2030-01-01', '2030-02-01', 1000, 1);
+INSERT INTO spaces (name, description, start_date, end_date, price, user_id) VALUES ('space2', 'description2', '2031-02-02', '2031-02-28', 15000, 1);
+INSERT INTO spaces (name, description, start_date, end_date, price, user_id) VALUES ('space3', 'description3', '2030-01-15', '2030-02-15', 2000, 2);
+INSERT INTO spaces (name, description, start_date, end_date, price, user_id) VALUES ('space4', 'description4', '2030-03-04', '2030-03-14', 70000, 2);
 INSERT INTO bookings (start_date, end_date, user_id, space_id) VALUES ('2030-01-17', '2030-01-19', 2, 3);
 INSERT INTO bookings (start_date, end_date, user_id, space_id) VALUES ('2031-02-10', '2031-02-17', 1, 2);
 INSERT INTO bookings (start_date, end_date, user_id, space_id) VALUES ('2030-03-04', '2030-03-08', 2, 4);
