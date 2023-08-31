@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, render_template, redirect, flash
 from lib.database_connection import get_flask_database_connection
 import re
+from lib.space_repository import SpaceRepository
 
 # Create a new Flask app
 app = Flask(__name__)
