@@ -52,13 +52,6 @@ def test_click_homepage_login_button(page, test_web_address):
     password = page.locator('.t-password')
     expect(password).to_have_text('Password:')
 
-# def test_login_page_available_spaces_get_route(page, test_web_address):
-#     page.goto(f'http://{test_web_address}/')
-#     page.click("text='Login'")
-#     page.click("text='Login'")
-#     p_tag = page.locator('p')
-#     expect(p_tag).to_have_text('Test Available Spaces')
-
 def test_sign_up_page_enter_invalid_email_address(page, test_web_address):
     page.goto(f'http://{test_web_address}/')
     page.click("text='Sign-up'")
@@ -90,14 +83,53 @@ def test_sign_up_page_enter_non_identical_passwords(page, test_web_address):
     error = page.locator('.error')
     expect(error).to_have_text('passwords do not match')
 
-# def test_sign_up_page_goes_through_to_available_spaces_page(page, test_web_address):
-#     page.goto(f'http://{test_web_address}/')
-#     page.click("text='Sign-up'")
-#     page.fill("input[name=email]", "m.@o")
-#     page.fill("input[name=password]", "Makersbnbpassword!23")
-#     page.fill("input[name=confirm_password]", "Makersbnbpassword!23")
-#     page.click("text='Sign-up'")
-#     text = page.locator('p')
-#     expect(text).to_have_text('Test Available Spaces')
+def test_sign_up_page_goes_through_to_available_spaces_page(page, test_web_address):
+    page.goto(f'http://{test_web_address}/')
+    page.click("text='Sign-up'")
+    page.fill("input[name=email]", "m.@o")
+    page.fill("input[name=password]", "Makersbnbpassword!23")
+    page.fill("input[name=confirm_password]", "Makersbnbpassword!23")
+    page.click("text='Sign-up'")
+    header = page.locator('h1')
+    expect(header).to_have_text('Available Spaces')
 
+def test_login_page_email_address_and_password_missing(page, test_web_address):
+    page.goto(f'http://{test_web_address}/')
+    page.click("text='Login'")
+    page.click("text='Login'")
+    error = page.locator('.error')
+    expect(error).to_have_text("Please enter your email address and password")
 
+def test_login_page_email_address_not_found(page, test_web_address):
+    page.goto(f'http://{test_web_address}/')
+    page.click("text='Login'")
+    page.fill("input[name=email]", "m.@o")
+    page.click("text='Login'")
+    error = page.locator('.error')
+    expect(error).to_have_text("Email address not found")
+
+def test_login_page_password_missing(page, test_web_address):
+    page.goto(f'http://{test_web_address}/')
+    page.click("text='Login'")
+    page.fill("input[name=email]", "user1@email.com")
+    page.click("text='Login'")
+    error = page.locator('.error')
+    expect(error).to_have_text("Please enter your password")
+
+def test_login_page_contains_incorrect_password(page, test_web_address):
+    page.goto(f'http://{test_web_address}/')
+    page.click("text='Login'")
+    page.fill("input[name=email]", "user1@email.com")
+    page.fill("input[name=password]", "kajgfhsalk")
+    page.click("text='Login'")
+    error = page.locator('.error')
+    expect(error).to_have_text("Incorrect password")
+
+def test_login_page_goes_through_to_available_spaces(page, test_web_address):
+    page.goto(f'http://{test_web_address}/')
+    page.click("text='Login'")
+    page.fill("input[name=email]", "user1@email.com")
+    page.fill("input[name=password]", "password1")
+    page.click("text='Login'")
+    header = page.locator('h1')
+    expect(header).to_have_text('Available Spaces')
