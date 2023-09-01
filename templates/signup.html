@@ -6,8 +6,27 @@
     <title>Sign-up</title>
 </head>
 <body>
-    <p>
-        Test sign-up
-    </p>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1 class="t-header">
+        Sign up to MakersBNB
+    </h1>
+    <form action="/sign_up" method="POST">
+        <div>
+            <p class="t-email">Email address:</p>
+            <input type="text" name="email" placeholder="email">
+            <p class="t-password">Password:</p>
+            <input type="text" name="password" placeholder="password">
+            <p class="t-confirm_password">Confirm password:</p>
+            <input type="text" name="confirm_password" placeholder="confirm password">
+            <br>
+            <input type="submit" value="Sign-up">
+        </div>
+    </form>
 </body>
 </html>

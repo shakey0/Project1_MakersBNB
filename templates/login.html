@@ -6,6 +6,13 @@
     <title>Login</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <p>
         <form action="/login" method="POST">
             <div>
@@ -13,7 +20,7 @@
                 <p class="t-email">Email address:</p>
                 <input type="text" name="email" placeholder="Email address">
                 <p class="t-password">Password:</p>
-                <input type="text" name="password" placeholder="Password">
+                <input type="text" name="password" placeholder="Password" autocomplete="off">
                 <br>
                 <input type="submit" value="Login">
             </div>
