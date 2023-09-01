@@ -115,6 +115,15 @@ def get_available_spaces():
     spaces = repo.all()
     return render_template('available_spaces.html', spaces = spaces)
 
+'''
+GET /new-space
+Returns heading
+'Enter new space details'
+'''
+@app.route('/new-space', methods=['GET'])
+def add_new_space():
+    return render_template('new_space.html')
+
 @app.route('/space/<int:id>', methods=['GET'])
 def get_space(id):
     connection = get_flask_database_connection(app)
@@ -123,9 +132,14 @@ def get_space(id):
     matching_space = [space for space in spaces if space.id == id]
     return render_template('space_page.html', matching_space = matching_space[0])
 
+
 @app.route('/newbooking', methods=['GET'])
 def get_newbooking():
     return render_template('newbooking.html')
+
+@app.route('/new-space-confirmation', methods=['GET'])
+def get_space_confirmation():
+    return render_template('new_space_confirmation.html')
 
 # Post route below was for making a new booking. This relied on extra functionality
 # around user login. Perhaps this can be implemented at a later date

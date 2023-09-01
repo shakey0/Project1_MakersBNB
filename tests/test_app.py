@@ -101,6 +101,41 @@ def test_login_page_email_address_and_password_missing(page, test_web_address):
     error = page.locator('.error')
     expect(error).to_have_text("Please enter your email address and password")
 
+    # p_tag = page.locator('p')
+    # expect(p_tag).to_have_text('Test Available Spaces')
+
+'''
+When we go to List New Space
+we should see a page with fields
+for the user to enter details of the space
+that match the Space object properties
+'''
+
+def test_new_space_page_displays(page, test_web_address):
+    page.goto(f'http://{test_web_address}/new-space')
+    h1_tag = page.locator('h1')
+    expect(h1_tag).to_have_text('Enter new space details')
+
+'''
+When we click the field with the appropriate attribute
+we can add that detail to the form
+'''
+## DESCOPED
+# def test_add_new_space_with_attribute_details(page, test_web_address, db_connection):
+#     db_connection.seed('seeds/makersbnb.sql')
+#     page.goto(f'http://{test_web_address}/new-space')
+#     page.fill('text=Space Name', 'Test new space')
+#     # page.fill('text=Description', 'Test description')
+#     # page.fill('text=Start date', '2023-03-01')
+#     # page.fill('text=End date', '2023-03-15')
+#     # page.fill('text=Price per night', 2000)
+
+#     page.click('text=Add new space')
+#     name_element = page.locator('.t-name')
+#     expect(name_element).to_have_text('Test new space')
+    
+
+
 def test_login_page_email_address_not_found(page, test_web_address):
     page.goto(f'http://{test_web_address}/')
     page.click("text='Login'")
@@ -135,6 +170,7 @@ def test_login_page_goes_through_to_available_spaces(page, test_web_address):
     header = page.locator('h1')
     expect(header).to_have_text('Available Spaces')
 
+
 # The test below is related to the POST route in app.py. This relies on further functionality
 # in the login procedure. Perhaps this can be implemented at a later date.
 
@@ -146,4 +182,5 @@ def test_login_page_goes_through_to_available_spaces(page, test_web_address):
 #     page.fill("input[checkin]", "2030-01-15")
 #     page.fill("input[checkout]", "2030-01-20")
 #     page.click("text='Book'")
+
 
