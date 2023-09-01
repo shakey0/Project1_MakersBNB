@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, render_template, redirect, flash
 from lib.database_connection import get_flask_database_connection
 import re
+from lib.user_repository import UserRepository
 from lib.space_repository import SpaceRepository
 
 # Create a new Flask app
@@ -69,6 +70,25 @@ def get_login():
 
 @app.route('/login', methods=['POST'])
 def post_login():
+    connection = get_flask_database_connection(app)
+    user_repo = UserRepository(connection)
+    email_address = request.form['email']
+    password = request.form['password']
+    all_users = user_repo.get_all()
+    user_email_addresses = [user.email for user in all_users]
+    if email_address == "" or email_address == None:
+        flash("Please enter your email address and password", "error")
+        return redirect('/login')
+    if email_address not in user_email_addresses:
+        flash("Email address not found", "error")
+        return redirect('/login')
+    if password == "" or password == None:
+        flash("Please enter your password", "error")
+        return redirect('/login')
+    user = user_repo.find_by_user_email(email_address)
+    if user.password != password:
+        flash("Incorrect password", "error")
+        return redirect('/login')
     return redirect('/available-spaces')
 
 @app.route('/available-spaces', methods=['GET'])
