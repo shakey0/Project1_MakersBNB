@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{matching_space.name}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css" >
 </head>
 <body>
     <h1>{{matching_space.name}}</h1>
@@ -35,7 +37,7 @@
             <label for="checkout">Check-out date:</label>
             <input type="date" id="checkout" name="checkout" value="{{matching_space.start_date}}" min="{{matching_space.start_date}}" max="{{matching_space.end_date}}" />
         </p>
-        <input type="submit" value="Book">
+        <input class="add_new_space_button-tag" type="submit" value="Book">
     <form>
 </body>
 </html>
