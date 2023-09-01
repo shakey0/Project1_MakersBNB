@@ -123,6 +123,20 @@ Returns heading
 def add_new_space():
     return render_template('new_space.html')
 
+@app.route('/new-space', methods=['POST'])
+def post_new_space():
+    connection = get_flask_database_connection(app)
+    repo = SpaceRepository(connection)
+    name = request.form['space_name']
+    description = request.form['description']
+    start_date = request.form['start_date']
+    end_date = request.form['end_date']
+    price = request.form['price']
+    space = Space(None, name, description, start_date, end_date, price, current_user.id)
+    repo.add_space(space)
+    return redirect('/new-space-confirmation')
+
+
 @app.route('/space/<int:id>', methods=['GET'])
 def get_space(id):
     connection = get_flask_database_connection(app)
