@@ -5,12 +5,22 @@
     </head>
     <body>
         <h1>Enter new space details</h1>
-        <form action="/new-space" method="POST">
+        <form action="/new-space-confirmation" method="GET">
             <div>
+                <p>Space Name:</p>
+                <input type="text" name="space_name" placeholder="Enter a name for your space">
                 <p>Description:</p>
                 <input type="text" name="description" placeholder="Enter a description">
-                <p>Date: (YYYY-MM-DD)</p>
-                <input type="text" name="description" placeholder="Enter a description">
+                <p>Start Date:</p>
+                <input type="date" id="start_date" name="start_date" value="2023-09-01" min="2023-09-01" max="2033-12-31" />
+                <p>End Date:</p>
+                <input type="date" id="end_date" name="end_date" value="2023-09-01" min="2023-09-01" max="2033-12-31" />
+                <p>Price per night:</p>
+                <input type="text" name="price" placeholder="Enter the price per night">
+                <p>
+                <input type="submit" value="Add a new space">
+                </p>
+                
             </div>
         </form>
     </body>

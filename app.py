@@ -123,6 +123,10 @@ def get_space(id):
 def get_newbooking():
     return render_template('newbooking.html')
 
+@app.route('/new-space-confirmation', methods=['GET'])
+def get_space_confirmation():
+    return render_template('new_space_confirmation.html')
+
 # Post route below was for making a new booking. This relied on extra functionality
 # around user login. Perhaps this can be implemented at a later date
 
