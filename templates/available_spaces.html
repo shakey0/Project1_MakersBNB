@@ -26,14 +26,14 @@
                     </tr>
                     <tr>
                         <td>Price</td>
-                        <td>{{space.price}}</td>
+                        <td>£{{"%.2f"|format(space.price/100)}} per night</td>
                     </tr>
                     <tr>
-                        <td>Start Date</td>
+                        <td>Available from</td>
                         <td>{{space.start_date}}</td>
                     </tr>
                     <tr>
-                        <td>End Date</td>
+                        <td>Available till</td>
                         <td>{{space.end_date}}</td>
                     </tr>
                     <tr></tr>
