@@ -100,6 +100,9 @@ def test_sign_up_page_enter_non_identical_passwords(page, test_web_address):
 #     text = page.locator('p')
 #     expect(text).to_have_text('Test Available Spaces')
 
+# The test below is related to the POST route in app.py. This relies on further functionality
+# in the login procedure. Perhaps this can be implemented at a later date.
+
 # def test_new_booking(page, test_web_address):
 #     page.goto(f'http://{test_web_address}/')
 #     page.click("text='Login'")
