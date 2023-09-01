@@ -3,6 +3,7 @@ from flask import Flask, request, render_template, redirect, flash
 from lib.database_connection import get_flask_database_connection
 import re
 from lib.user_repository import UserRepository
+from lib.user import User
 from lib.space_repository import SpaceRepository
 from flask_login import LoginManager, login_user, logout_user, current_user
 from lib.space import Space
@@ -60,6 +61,9 @@ def get_signup():
 
 @app.route('/sign_up', methods=['POST'])
 def signup(): 
+    connection = get_flask_database_connection(app)
+    repo = UserRepository(connection)
+    name = request.form['name']
     email_address = request.form['email']
     password = request.form['password']
     confirm_password = request.form['confirm_password']
@@ -74,6 +78,10 @@ def signup():
     if not passwords_match(password, confirm_password):
         flash("passwords do not match", "error")
         return redirect('/signup')
+    user = User(None, name, email_address, password)
+    id = repo.add_user(user)
+    user.id = id
+    login_user(user)
     return redirect('/available-spaces')
 
 @app.route('/login', methods=['GET'])
@@ -112,7 +120,7 @@ def get_available_spaces():
     connection = get_flask_database_connection(app)
     repo = SpaceRepository(connection)
     spaces = repo.all()
-    return render_template('available_spaces.html', spaces = spaces)
+    return render_template('available_spaces.html', spaces = spaces, current_user = current_user)
 
 '''
 GET /new-space
