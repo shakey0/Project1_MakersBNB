@@ -4,6 +4,7 @@ from lib.database_connection import get_flask_database_connection
 import re
 from lib.user_repository import UserRepository
 from lib.space_repository import SpaceRepository
+from flask_login import LoginManager, login_user, logout_user, current_user
 from lib.space import Space
 from lib.booking_repository import BookingRepository
 from lib.booking import Booking
@@ -11,6 +12,8 @@ from lib.booking import Booking
 # Create a new Flask app
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 # == Your Routes Here ==
 
@@ -18,6 +21,13 @@ app.secret_key = 'your_secret_key_here'
 # Returns the homepage
 # Try it:
 #   ; open http://localhost:5000/
+
+@login_manager.user_loader
+def load_user(user_id):
+    connection = get_flask_database_connection(app)
+    repo = UserRepository(connection)
+    return repo.find_by_user_id(user_id)
+
 
 def is_valid_email(email):
     return "@" in email and "." in email
@@ -92,7 +102,11 @@ def post_login():
     if user.password != password:
         flash("Incorrect password", "error")
         return redirect('/login')
-    return redirect('/available-spaces')
+
+    if isinstance(user.id, int):
+        login_user(user)
+        return redirect('/available-spaces')
+    return redirect('/login')
 
 @app.route('/available-spaces', methods=['GET'])
 def get_available_spaces():
