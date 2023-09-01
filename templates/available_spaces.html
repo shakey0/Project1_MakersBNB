@@ -9,8 +9,10 @@
 <body>
     <h1 class="available-spaces-title">Available Spaces</h1>
     <div>
-        <p><input type="button" id="add_new_space" onclick="location.href='/new-space';" value="Add a new space" /></p>
-        {% for space in spaces %}
+        <div class="button-container">
+            <p><input type="button" id="add_new_space" onclick="location.href='/new-space';" value="Add a new space" /></p>
+        </div>
+            {% for space in spaces %}
             <div class="individual_space-tag">
                 <table border="2px solid" width="100%" >
                     <tr>
@@ -35,7 +37,9 @@
                     </tr>
                     <tr></tr>
                 </table>
-                <input class="book_space_button-tag" type="button" id="{{space.id}}" onclick="location.href='/space/{{space.id}}';" value="Book" />
+                <div class="button-container">
+                    <input class="book_space_button-tag" type="button" id="{{space.id}}" onclick="location.href='/space/{{space.id}}';" value="Book" />
+                </div>
                 <br>
                 <br>
             </div>

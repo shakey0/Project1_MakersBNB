@@ -86,3 +86,11 @@ td {
 .book_space_button-tag {
     margin-left: 10px;
 }
+
+.button-container{
+    text-align: center;
+}
+
+.button-container button{
+    display: inline-bock;
+}
