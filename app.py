@@ -151,8 +151,18 @@ def get_space(id):
     repo = SpaceRepository(connection)
     spaces = repo.all()
     matching_space = [space for space in spaces if space.id == id]
-    return render_template('space_page.html', matching_space = matching_space[0])
+    return render_template('space_page.html', matching_space = matching_space[0], current_user = current_user)
 
+@app.route('/space/<int:id>', methods=['POST'])
+def post_newbooking(id):
+    connection = get_flask_database_connection(app)
+    repo = BookingRepository(connection)
+    start_date = request.form['checkin']
+    end_date = request.form['checkout']
+    user_id = current_user.id
+    space_id = id
+    repo.create(Booking(None, start_date, end_date, user_id, space_id))
+    return redirect('/newbooking')
 
 @app.route('/newbooking', methods=['GET'])
 def get_newbooking():

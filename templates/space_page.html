@@ -28,7 +28,7 @@
         </tr>
     </table>
     <br>
-    <form action="/newbooking" method="GET">
+    <form action="/space/{{matching_space.id}}" method="POST">
         <p>
             <label for="checkin">Check-in date:</label>
             <input type="date" id="checkin" name="checkin" value="{{matching_space.start_date}}" min="{{matching_space.start_date}}" max="{{matching_space.end_date}}" />
