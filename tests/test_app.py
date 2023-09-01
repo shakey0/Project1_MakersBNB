@@ -93,6 +93,7 @@ def test_sign_up_page_goes_through_to_available_spaces_page(page, test_web_addre
     header = page.locator('h1')
     expect(header).to_have_text('Available Spaces')
 
+
 def test_login_page_email_address_and_password_missing(page, test_web_address):
     page.goto(f'http://{test_web_address}/')
     page.click("text='Login'")
@@ -133,3 +134,16 @@ def test_login_page_goes_through_to_available_spaces(page, test_web_address):
     page.click("text='Login'")
     header = page.locator('h1')
     expect(header).to_have_text('Available Spaces')
+
+# The test below is related to the POST route in app.py. This relies on further functionality
+# in the login procedure. Perhaps this can be implemented at a later date.
+
+# def test_new_booking(page, test_web_address):
+#     page.goto(f'http://{test_web_address}/')
+#     page.click("text='Login'")
+#     page.click("text='Login'")
+#     page.click("id='3'")
+#     page.fill("input[checkin]", "2030-01-15")
+#     page.fill("input[checkout]", "2030-01-20")
+#     page.click("text='Book'")
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{matching_space.name}}</title>
+</head>
+<body>
+    <h1>{{matching_space.name}}</h1>
+    <table border="2px solid" width="100%" >
+        <tr>
+            <td width="12%">Description</td>
+            <td>{{matching_space.description}}</td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>{{matching_space.price}}</td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td>{{matching_space.start_date}}</td>
+        </tr>
+        <tr>
+            <td>End Date</td>
+            <td>{{matching_space.end_date}}</td>
+        </tr>
+    </table>
+    <br>
+    <form action="/newbooking" method="GET">
+        <p>
+            <label for="checkin">Check-in date:</label>
+            <input type="date" id="checkin" name="checkin" value="{{matching_space.start_date}}" min="{{matching_space.start_date}}" max="{{matching_space.end_date}}" />
+        </p>
+        <p>
+            <label for="checkout">Check-out date:</label>
+            <input type="date" id="checkout" name="checkout" value="{{matching_space.start_date}}" min="{{matching_space.start_date}}" max="{{matching_space.end_date}}" />
+        </p>
+        <input type="submit" value="Book">
+    <form>
+</body>
+</html>
