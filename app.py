@@ -4,6 +4,9 @@ from lib.database_connection import get_flask_database_connection
 import re
 from lib.user_repository import UserRepository
 from lib.space_repository import SpaceRepository
+from lib.space import Space
+from lib.booking_repository import BookingRepository
+from lib.booking import Booking
 
 # Create a new Flask app
 app = Flask(__name__)
@@ -107,6 +110,28 @@ Returns heading
 def add_new_space():
     return render_template('new_space.html')
 
+@app.route('/space/<int:id>', methods=['GET'])
+def get_space(id):
+    connection = get_flask_database_connection(app)
+    repo = SpaceRepository(connection)
+    spaces = repo.all()
+    matching_space = [space for space in spaces if space.id == id]
+    return render_template('space_page.html', matching_space = matching_space[0])
+
+
+@app.route('/newbooking', methods=['GET'])
+def get_newbooking():
+    return render_template('newbooking.html')
+
+# Post route below was for making a new booking. This relied on extra functionality
+# around user login. Perhaps this can be implemented at a later date
+
+# @app.route('/newbooking', methods=['POST'])
+# def post_new_booking():
+#     connection = get_flask_database_connection(app)
+#     repo = BookingRepository(connection)
+#     start_date = request.form['checkin']
+#     end_date = request.form['checkout']
 
 
 # These lines start the server if you run this file directly
