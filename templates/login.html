@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css" >
 </head>
 <body>
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -15,7 +17,7 @@
     {% endwith %}
     <p>
         <form action="/login" method="POST">
-            <div>
+            <div class="login_page_buttons-tag">
                 <h1 class="t-header">Please Login</h1>
                 <p class="t-email">Email address:</p>
                 <input type="text" name="email" placeholder="Email address">

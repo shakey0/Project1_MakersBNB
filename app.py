@@ -74,7 +74,6 @@ def signup():
     if not passwords_match(password, confirm_password):
         flash("passwords do not match", "error")
         return redirect('/signup')
-
     return redirect('/available-spaces')
 
 @app.route('/login', methods=['GET'])

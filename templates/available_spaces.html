@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Available Spaces</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css" >
 </head>
 <body>
-    <h1>Available Spaces</h1>
+    <h1 class="available-spaces-title">Available Spaces</h1>
     <div>
-        <p><input type="button" id="add_new_space" onclick="location.href='/new-space';" value="Add a new space" /></p>
-        {% for space in spaces %}
-            <div>
+        <div class="button-container">
+            <p><input type="button" id="add_new_space" onclick="location.href='/new-space';" value="Add a new space" /></p>
+        </div>
+            {% for space in spaces %}
+            <div class="individual_space-tag">
                 <table border="2px solid" width="100%" >
                     <tr>
                         <td width="12%">Name</td>
@@ -33,7 +37,9 @@
                     </tr>
                     <tr></tr>
                 </table>
-                <input type="button" id="{{space.id}}" onclick="location.href='/space/{{space.id}}';" value="Book" />
+                <div class="button-container">
+                    <input class="book_space_button-tag" type="button" id="{{space.id}}" onclick="location.href='/space/{{space.id}}';" value="Book" />
+                </div>
                 <br>
                 <br>
             </div>
